@@ -1,0 +1,24 @@
+#app {
+
+  // 主体区域
+  .main-container {
+    min-height: 100%;
+    transition: margin-left .2s;
+    margin-left: $sideBarWidth; // 为侧边栏留出180px的宽度
+    position: relative;
+  }
+
+  // 侧边栏
+  .sidebar-container {
+    transition: width .28s;
+    width: $sideBarWidth !important;
+    height: 100%;
+    position: fixed;
+    font-size: 0px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    overflow: hidden;
+  }
+}

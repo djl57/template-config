@@ -10,7 +10,8 @@
 1. [vue的项目里面copy别人package.json  运行时出现了如下的错误（error chromedriver@2.33.2 install: `node install.js`）](https://www.cnblogs.com/sundjly/p/8039172.html)
 2. [按需引入element时报：Module build failed: Error: Couldn't find preset "es2015" relative to directory](https://blog.csdn.net/you23hai45/article/details/83014145)
 npm install --save-dev babel-preset-es2015
-3. 
+3. 因为按需加载之后改了babelrc的内容，导致在router中使用按需加载事报语法错误，尝试将babelrc中的新内容插入到原内容中解决，为什么这么可以解决的原因待考究。
+4. 作为一个新手想要通过一个简单demo深入研究import和export时浏览器报语法错误，需要[<script type="module"></script>](https://blog.csdn.net/qq_22046267/article/details/82228882)
 
 ### 完成步骤
 1. 建立目录结构
@@ -19,3 +20,14 @@ npm install --save-dev babel-preset-es2015
 4. 引入[element](http://element-cn.eleme.io/#/zh-CN/component/installation)，
 此项目[按需引入](http://element-cn.eleme.io/#/zh-CN/component/quickstart)，
 国际化
+5. 引入[vuex](https://vuex.vuejs.org/zh/installation.html)
+引入icons 和 权限控制 暂时跳过
+6. 正式开始
+
+### 看代码步骤
+1. 先看router的'/'指向哪个文件
+2. 看layout页面
+3. 其中涉及到import和export的使用，去看了一下
+4. 涉及到全局css，去看了一下，期间又总结了一遍两栏布局的样式编写方法（目前记录三种：flex、margin-left、float）
+5. 继续看layout及其衍生vue文件，需要用到store
+6. 开始引入vuex
