@@ -22,7 +22,7 @@ npm install --save-dev babel-preset-es2015
 国际化
 5. 引入[vuex](https://vuex.vuejs.org/zh/installation.html)
 引入icons 和 权限控制 暂时跳过
-6. 正式开始
+6. 正式开始看代码
 
 ### 看代码步骤
 1. 先看router的'/'指向哪个文件
@@ -41,11 +41,14 @@ npm install --save-dev babel-preset-es2015
 14. 又看了一遍axios文档
 15. 生产模式（build）和开发模式（dev）采用不同的BASE_URL，而要在打包环境下区分开发、测试、生产三个环境，需要另外配置，网上教程都需要安装cross-env，所以没搞。
 16. 在查打包环境配置的时候查到[process.env.npm_lifecycle_event](https://www.jb51.net/article/137610.htm)，会根据npm run 后面的内容变化，所以尝试在package.json中添加其他命令
+
 | 原有命令 | 表示环境 | 添加命令 | 表示环境 |
-|:--:|:--:|:--:|:--:|
+|:-------:|:--------:|:-------:|:-----------:|
 | dev     | 开发     | dev:test | 开发测试环境 |
 |         |          | dev:mock | 开发mock数据 |
 |         |          | dev:prod | 开发正式环境 |
 | build   | 打包     | build:mock | mock数据打包 |
 |         |          | build:test | 测试环境打包 |
 |         |          | build:prod | 正式环境打包 |
+
+17. 到这里看完vuex部分的代码
