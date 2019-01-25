@@ -1,0 +1,9 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "name": "djlun",
+    "age": 18,
+    "sex": 0
+  }
+}

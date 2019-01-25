@@ -14,6 +14,9 @@ locale.use(lang)
 // import '@/icons' // 暂时跳过
 // import '@/permission' // 权限控制，暂时跳过
 
+import { storage } from './assets/global'
+Vue.prototype.$storage = storage
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

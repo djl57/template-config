@@ -3,6 +3,7 @@
     <!-- <div v-if="decice === 'mobile' && sidebar.opened" class="drawer-bg" @click="handleClickOutside"></div> -->
     <side-bar class="sidebar-container"></side-bar>
     <div class="main-container">
+      <div @click="message">message</div>
       <nav-bar></nav-bar>
       <app-main></app-main>
     </div>
@@ -24,6 +25,21 @@ export default {
       return {
 
       }
+    }
+  },
+  methods: {
+    message() {
+      this.$msgbox.confirm(
+        '你已被登出，可以取消继续留在该页面，或者重新登录',
+        '确定登出',
+        {
+          confirmButtonText: '重新登录',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+      )
+      .then(() => console.log('confirm'))
+      .catch(() => console.log('cancel'))
     }
   }
 }
