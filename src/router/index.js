@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const Layout = () => import('@/views/layout/layout')
+const Layout = () => import('@/views/layout')
 
 const routers = new Router({
   // mode: 'history', // 需后端支持
@@ -23,7 +23,17 @@ const routers = new Router({
       children: [
         {
           path: 'dashboard',
-          component: () => import('@/views/dashboard/index')
+          component: () => import('@/views/dashBoard')
+        }
+      ]
+    },
+    {
+      path: 'external-link',
+      component: Layout,
+      children: [
+        {
+          path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
+          meta: { title: '外链', icon: 'link' }
         }
       ]
     }

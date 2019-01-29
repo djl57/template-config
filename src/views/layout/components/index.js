@@ -1,3 +1,3 @@
-export { default as NavBar } from './navbar'
-export { default as SideBar } from './sidebar'
-export { default as AppMain } from './appmain'
+export { default as NavBar } from './navBar'
+export { default as SideBar } from './sideBar'
+export { default as AppMain } from './appMain'

@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <!-- dashboard -->
-  </div>
+  <svg>
+    <!-- <use :xlink:href="iconName"> -->
+  </svg>
 </template>
 
 <script>
@@ -10,6 +10,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 
 </style>

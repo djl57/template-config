@@ -4,8 +4,8 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 const user = {
   state: {
     token: getToken(),
-    name: '',
-    avatar: '',
+    name: 'djlun',
+    avatar: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=173886539,2588581153&fm=27&gp=0.jpg',
     roles: []
   },
 
@@ -53,7 +53,7 @@ const user = {
     },
 
     // 登出
-    Logout: ({ commit, state }) => {
+    LogOut: ({ commit, state }) => {
       return new Promise((resolve, reject) => {
         logout(state.token)
         .then(() => {

@@ -26,8 +26,8 @@ const app = {
     TOGGLE_DEVICE: (state, device) => state.device = device
   },
   actions: {
-    ToggleSidebar: ({ commit }) => commit('TOGGLE_SIDEBAR'),
-    CloseSidebar: ({ commit }, { withoutAnimation }) => {
+    ToggleSideBar: ({ commit }) => commit('TOGGLE_SIDEBAR'),
+    CloseSideBar: ({ commit }, { withoutAnimation }) => {
       commit('CLOSE_SIDEBAR', withoutAnimation)
     },
     ToggleDevice: ({ commit }, device) => {

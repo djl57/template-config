@@ -11,7 +11,7 @@ import lang from 'element-ui/lib/locale/lang/en' // 国际化
 import locale from 'element-ui/lib/locale'
 locale.use(lang)
 
-// import '@/icons' // 暂时跳过
+import '@/icons'
 // import '@/permission' // 权限控制，暂时跳过
 
 import { storage } from './assets/global'
