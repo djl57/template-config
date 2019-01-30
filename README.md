@@ -74,6 +74,7 @@ npm install --save-dev babel-preset-es2015
 21. navbar用到了组件*el-menu*、*el-dropdown*
 22. navbar中引入了Hamburger组件和breadcrumb组件，先看hamburger组件，hamburger组件是用来切换侧边栏的宽度
 23. 再看breadcrumb组件，它用来动态生成面包屑列表。用到了*el-breadcrumb*，其中有一个getBreadcrumb方法，了解[this.$route对象：在使用了 vue-router 的应用中，路由对象会被注入每个组件中，赋值为 this.$route ，并且当路由切换时，路由对象会被更新。](https://www.cnblogs.com/wangEddy/p/8310262.html)[官方api说明](https://router.vuejs.org/zh/api/#%E8%B7%AF%E7%94%B1%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7)
+
 | 路由对象属性名称 | 数据类型 | 描述 |
 |:---------------:|:-------:|:---:|
 | $route.path     | 字符串  | 当前路由对象的路径，会被解析为绝对路径，如 "/home/news" |
@@ -166,7 +167,8 @@ npm install --save-dev babel-preset-es2015
         }
       },
 ```
-至此svg-icon组件完成，想要添加icon时只需要在@/icons的svg中添加svg，然后使用就可以了，关于如何使用，开始看花裤衩大佬的[另一个模板vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)，看他是怎么优雅地使用svg的
+至此svg-icon组件完成，想要添加icon时只需要在@/icons的svg中添加svg，然后使用就可以了，关于如何使用，看花裤衩大佬的[另一个模板vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+43. 接下来开始看vue-element-admin了
 
 
 
