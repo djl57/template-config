@@ -111,8 +111,11 @@ npm install --save-dev babel-preset-es2015
 32. sidebar看完，开始看sidebaritem
 33. sidebaritem的逻辑梳理：
     （1）sidebar套一个el-menu的壳，设置了背景色、文字颜色等，然后引入了sidebaritem，并且给sidebaritem传了item和basePath，因为sidebar不是nest，所以没传isNest这个参数，默认为false。
+
     （2）其中item为 new Router({ routes:[] })中设置的routes 循环得到的，basePath为routes中设置的path属性。
+
     （3）进入sidebaritem之后，首先会判断`v-if="!item.hidden && item.children"`，如果item的hidden属性为false并且item.children存在时才显示路由。因为router里设置的，只有首页是hidden为true，login和404页面是没有children的，只要是侧边栏的路由，都具有children。所以这个判断表明的意思是只要是侧边栏的路由，就给它显示出来。
+
     （4）接下来再给它进行一次判断：
     ```
     v-if="hasOneShowingChild(item.children, item)
@@ -138,7 +141,7 @@ npm install --save-dev babel-preset-es2015
     当传入的path是一个外链是，直接把外链传给link组件
     当传入的path不是外链时，引入node.js的path模块，使用`path.resolve(this.basePath, routePath)`将basePath和children.path结合起来。
 
-    link组件会把外链进行a标签的方式处理[rel: 'noopener'的作用](https://juejin.im/post/5950f387f265da6c44072d6c)，把路由path进行router-link处理
+    link组件会把外链进行a标签的方式处理，[rel: 'noopener'的作用](https://juejin.im/post/5950f387f265da6c44072d6c)，把路由path进行router-link处理
 35. 开始看item组件，首先，需要了解一下[函数式组件](https://cn.vuejs.org/v2/guide/render-function.html#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6)，函数式组件的意义？
 36. 如果children.length>1，那就是以el-submenu来显示路由。又引入了item。在sidebaritem组件中引入了sidebaritem，即[引入了组件本身](https://blog.csdn.net/lhjuejiang/article/details/82116612)
 37. sidebaritem 好了之后，item 报 Unknown custom element: <svg-icon>，开始看icon是怎么弄的。开始看[文档](https://panjiachen.github.io/vue-element-admin-site/zh/feature/component/svg-icon.html)
@@ -168,6 +171,7 @@ npm install --save-dev babel-preset-es2015
       },
 ```
 至此svg-icon组件完成，想要添加icon时只需要在@/icons的svg中添加svg，然后使用就可以了，关于如何使用，看花裤衩大佬的[另一个模板vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+
 43. 接下来开始看vue-element-admin了
 
 
