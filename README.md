@@ -26,6 +26,7 @@
 npm install --save-dev babel-preset-es2015
 3. 因为按需加载之后改了babelrc的内容，导致在router中使用按需加载事报语法错误，尝试将babelrc中的新内容插入到原内容中解决，为什么这么可以解决的原因待考究。
 4. 作为一个新手想要通过一个简单demo深入研究import和export时浏览器报语法错误，需要[<script type="module"></script>](https://blog.csdn.net/qq_22046267/article/details/82228882)
+5. [使用svg-sprite-loader 遇到的问题](https://blog.csdn.net/github_35631540/article/details/78818919)
 
 ### 完成步骤
 1. 建立目录结构
@@ -142,6 +143,30 @@ npm install --save-dev babel-preset-es2015
 37. sidebaritem 好了之后，item 报 Unknown custom element: <svg-icon>，开始看icon是怎么弄的。开始看[文档](https://panjiachen.github.io/vue-element-admin-site/zh/feature/component/svg-icon.html)
 38. 在main.js中引入 @/icons ，在components中添加svgIcon组件，在icons中引入
 39. [require.context是webpack中，用来创建自己的（模块）上下文](https://blog.csdn.net/viewyu12345/article/details/83012970)
+40. [aria-hidden="true"](http://www.imooc.com/qadetail/62014)
+41. [CSS currentColor 变量的使用](https://www.cnblogs.com/Wayou/p/css-currentColor.html)
+42. @/icons 和 svg-icon组件 代码写完，引入`npm i svg-sprite-loader`之后，还需要配置webpack.base.conf.js：
+``` js
+      {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
+        include: [resolve('src/icons')],
+        options: {
+          symbolId: 'icon-[name]'
+        }
+      },
+      // 上面整段添加
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        exclude: [resolve('src/icons')], // 添加
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        }
+      },
+```
+至此svg-icon组件完成，想要添加icon时只需要在@/icons的svg中添加svg，然后使用就可以了，关于如何使用，开始看花裤衩大佬的[另一个模板vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)，看他是怎么优雅地使用svg的
 
 
 

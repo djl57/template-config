@@ -12,7 +12,7 @@
         <i class="el-icon-caret-bottom"></i>
       </div>
       <el-dropdown-menu slot="dropdown" class="user-dropdown">
-        <router-link class="inlineBlock" to="/">
+        <router-link to="/">
           <el-dropdown-item>
             首页
           </el-dropdown-item>
