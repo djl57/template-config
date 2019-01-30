@@ -7,16 +7,17 @@
 | ssr           | 否          |
 
 | 组件 | 作用 |
-|:----:|:----:|
+|------|:----:|
 | layout    | 布局用，默认到/dashboard |
 | - sidebar | 侧边栏，设置了背景色、文字颜色等 |
 | - - sidebaritem | 侧边栏自动生成的逻辑 |
-| - - link | 判断侧边栏是前端路由链接还是外链，然后跳转 |
-| - - item | 生成侧边栏的图标和文字 |
+| - - link  | 判断侧边栏是前端路由链接还是外链，然后跳转 |
+| - - item  | 生成侧边栏的图标和文字 |
 | - navbar  | 导航栏 |
-| - - hamburger  | 用于控制侧边栏的宽度 |
-| - - breadcrumb | 自动生成顶部面包屑导航 |
+| - - hamburger   | 用于控制侧边栏的宽度 |
+| - - breadcrumb  | 自动生成顶部面包屑导航 |
 | - appmain | 主要内容 |
+| svgicon   | icon组件，使用svg时调用此组件 |
 
 什么是[dashboard](http://www.woshipm.com/data-analysis/691262.html)
 
