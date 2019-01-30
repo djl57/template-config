@@ -6,14 +6,25 @@
         in-out：新元素先进行过渡，完成之后当前元素过渡离开
         out-in：当前元素先进行过渡，完成之后新元素过渡进入
         -->
-      <router-view></router-view>
+      <!-- <router-view></router-view> -->
+      <keep-alive :include="cachedViews">
+        <router-view :key="key"/>
+      </keep-alive>
     </transition>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'appmain'
+  name: 'appmain',
+  computed: {
+    cachedViews() {
+      // return this.$store.state.tagsView.cachedViews
+    },
+    key() {
+      return this.$route.fullPath
+    }
+  }
 }
 </script>
 

@@ -5,6 +5,10 @@
 | 需要完成的功能 | 是否已经完成 |
 |---------------|:-----------:|
 | ssr           | 否          |
+| axios         | 是          |
+| svg-icon      | 是          |
+| 侧边栏自动生成 | 是          |
+| 前端鉴权      | 否          |
 
 | 组件 | 作用 |
 |------|------|
@@ -31,13 +35,17 @@ npm install --save-dev babel-preset-es2015
 
 ### 完成步骤
 1. 建立目录结构
-2. 安装scss
-3. 引入normalize 和 全局css文件index.scss
+2. [安装scss](https://blog.csdn.net/qq_36645327/article/details/79191026)，新版vue只需要npm安装即可，不需要进行webpack配置
+3. 引入[normalize](https://www.jianshu.com/p/9d7ff89757fd) 和 全局css文件index.scss
 4. 引入[element](http://element-cn.eleme.io/#/zh-CN/component/installation)，
 此项目[按需引入](http://element-cn.eleme.io/#/zh-CN/component/quickstart)，
-国际化
-5. 引入[vuex](https://vuex.vuejs.org/zh/installation.html)
-引入icons 和 权限控制 暂时跳过
+国际化（待研究）
+5. 引入[vuex](https://vuex.vuejs.org/zh/installation.html)（6 - 17），完成
+
+   引入icons（37 - 42），~~暂时跳过~~，完成
+
+   引入权限控制，暂时跳过
+
 6. 正式开始看代码
 
 ### 看代码步骤
@@ -66,6 +74,8 @@ npm install --save-dev babel-preset-es2015
 | build   | 打包     | build:mock | mock数据打包 |
 |         |          | build:test | 测试环境打包 |
 |         |          | build:prod | 正式环境打包 |
+
+项目本身用的多环境配置方法是[搜索多环境](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
 
 17. 到这里看完vuex部分的代码
 18. 继续回去看layout
@@ -124,10 +134,13 @@ npm install --save-dev babel-preset-es2015
       && !item.alwaysShow"
     ```
     先看hasOneShowingChild这个方法传入item.children和item参数，
-    children过滤一遍，children.hidden为true的过滤掉，不为true的赋给onlyOneChild，过滤得到showingChildren
+    children过滤一遍，children.hidden为true的过滤掉，不为true的赋给onlyOneChild，过滤得到showingChildren。
+
     如果showingChildren的length = 1 则返回true
+
                               = 0 则将item赋给onlyOneChild，同时重设`path: '',
-          noShowingChildren: true`。返回true
+          noShowingChildren: true`。返回true。
+
     其他情况，即showingChildren的length>1，则返回false
 
     刚进来的时候onlyOneChild为null，经过hasOneShowingChild这个方法children.length=0的时候onlyOneChild变成了{...item, path: '', noShowingChildren: true}，children.length=1的时候是{ children[0] }，children.length>1的时候不在这个v-if显示。
@@ -140,15 +153,16 @@ npm install --save-dev babel-preset-es2015
 34. 开始看 link 组件，link 组件接收参数to，to为resolvePath(onlyOneChild.path)方法的返回值，分析resolvePath(onlyOneChild.path)方法:
 
     当传入的path是一个外链是，直接把外链传给link组件
+
     当传入的path不是外链时，引入node.js的path模块，使用`path.resolve(this.basePath, routePath)`将basePath和children.path结合起来。
 
     link组件会把外链进行a标签的方式处理，[rel: 'noopener'的作用](https://juejin.im/post/5950f387f265da6c44072d6c)，把路由path进行router-link处理
 35. 开始看item组件，首先，需要了解一下[函数式组件](https://cn.vuejs.org/v2/guide/render-function.html#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6)，函数式组件的意义？
-36. 如果children.length>1，那就是以el-submenu来显示路由。又引入了item。在sidebaritem组件中引入了sidebaritem，即[引入了组件本身](https://blog.csdn.net/lhjuejiang/article/details/82116612)
-37. sidebaritem 好了之后，item 报 Unknown custom element: <svg-icon>，开始看icon是怎么弄的。开始看[文档](https://panjiachen.github.io/vue-element-admin-site/zh/feature/component/svg-icon.html)
-38. 在main.js中引入 @/icons ，在components中添加svgIcon组件，在icons中引入
+36. 如果children.length>1，那就是以el-submenu来显示路由。又引入了item。在sidebaritem组件中引入了sidebaritem，即[组件引入了组件本身](https://blog.csdn.net/lhjuejiang/article/details/82116612)。
+37. sidebaritem 好了之后，item 报 Unknown custom element: svg-icon，开始看icon是怎么弄的。开始看[花裤衩的文档](https://panjiachen.github.io/vue-element-admin-site/zh/feature/component/svg-icon.html)。
+38. 在main.js中引入 @/icons ，在components中添加svgIcon组件，在icons中引入svgIcon组件。
 39. [require.context是webpack中，用来创建自己的（模块）上下文](https://blog.csdn.net/viewyu12345/article/details/83012970)
-40. [aria-hidden="true"](http://www.imooc.com/qadetail/62014)
+40. [aria-hidden="true"是什么](http://www.imooc.com/qadetail/62014)
 41. [CSS currentColor 变量的使用](https://www.cnblogs.com/Wayou/p/css-currentColor.html)
 42. @/icons 和 svg-icon组件 代码写完，引入`npm i svg-sprite-loader`之后，还需要配置webpack.base.conf.js：
 ``` js
@@ -171,14 +185,9 @@ npm install --save-dev babel-preset-es2015
         }
       },
 ```
-至此svg-icon组件完成，想要添加icon时只需要在@/icons的svg中添加svg，然后使用就可以了，关于如何使用，看花裤衩大佬的[另一个模板vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+至此svg-icon组件完成，想要添加icon时只需要在@/icons的svg中添加svg，然后使用就可以了，关于具体如何使用，看花裤衩大佬的[另一个模板vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 
-43. 接下来开始看vue-element-admin了
+43. 接下来开始看vue-element-admin了，[文档](https://panjiachen.github.io/vue-element-admin-site/zh/guide/essentials/router-and-nav.html)
 
+### 看vue-element-admin[点击跳转](./vueElement.md)
 
-
-    
-    
-
-
-    
