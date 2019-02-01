@@ -334,5 +334,5 @@ npm install --save-dev babel-preset-es2015
     （7）看 layout 的 mixins，isMobile() 根据屏幕的宽度 和 1024 的大小比较来确定，如果是 mobile，就改变 device 为 'mobile' ，并且无动画地关闭侧边栏，并且在 beforeMount 之前添加一个方法，当屏幕大小改变时触发resize 方法，重新判断 isMobile()
     （8）看 hamburger 组件，两个参数：isActive 和 toggleClick ，isActive 控制图标方向，和 sidebar.opened 同值，toggleClick 改变 sidebar.opened 的值
  
-
-55. 因为花裤衩大佬的项目出现跨域问题，[跨域的解决](https://segmentfault.com/a/1190000011007043)
+55. 因为花裤衩大佬的项目出现跨域问题，[跨域的解决](https://segmentfault.com/a/1190000011007043)，没来得及实施大佬又修好了
+56. 先写一个展示 svg-icon 的页面
