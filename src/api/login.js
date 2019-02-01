@@ -10,6 +10,7 @@ const login = (username, passward) => {
   //   }
   // })
   return new Promise(resolve => {
+    console.log('进到login接口')
     setTimeout(() => {
       let res = {
         code: 0,
@@ -19,7 +20,7 @@ const login = (username, passward) => {
         }
       }
       resolve(res)
-    }, 2000)
+    }, 800)
   })
 }
 
@@ -30,6 +31,7 @@ const getInfo = (token) => {
   //   param: { token }
   // })
   return new Promise(resolve => {
+    console.log('进到getInfo接口')
     setTimeout(() => {
       let res = {
         code: 0,
@@ -41,7 +43,7 @@ const getInfo = (token) => {
         }
       }
       resolve(res)
-    }, 2000)
+    }, 800)
   })
 }
 
@@ -58,10 +60,11 @@ const logout = () => {
         msg: '登出成功'
       }
       resolve(res)
-    }, 2000)
+    }, 800)
   })
 }
 
 export {
   login, getInfo, logout
 }
+

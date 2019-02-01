@@ -3,10 +3,16 @@ import store from './store'
 // import NProgress from 'nprogress' // Progress 进度条
 // import 'nprogress/nprogress.css'// Progress 进度条样式
 import { Message } from 'element-ui'
-import { getToken } from '@/utils/auth'
+import { getToken/* , removeToken */ } from '@/utils/auth'
+// import { curTimeStamp } from './utils'
 
 const whiteList = ['/login']  // 不重定向白名单
 router.beforeEach((to, from, next) => {
+  // if (curTimeStamp() - getToken() > 10000) {
+  //   removeToken()
+  // }
+  console.log(getToken())
+  console.log(new Date().getTime())
   if (getToken()) {
     if (to.path === '/login') {
       next({ path: '/' })

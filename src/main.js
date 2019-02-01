@@ -14,9 +14,6 @@ locale.use(lang)
 import '@/icons' // 引入svg-icon组件
 import '@/permission' // 权限控制
 
-import { storage } from './assets/global'
-Vue.prototype.$sto = storage
-
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

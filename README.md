@@ -29,6 +29,7 @@ npm install --save-dev babel-preset-es2015
 3. 因为按需加载之后改了 babelrc 的内容，导致在 router 中使用按需加载事报语法错误，尝试将 babelrc 中的新内容插入到原内容中解决，为什么这么可以解决的原因待考究。
 4. 作为一个新手想要通过一个简单 demo 深入研究 import 和 export 时浏览器报语法错误，需要[<script type="module"></script>](https://blog.csdn.net/qq_22046267/article/details/82228882)
 5. [使用 svg-sprite-loader 遇到的问题](https://blog.csdn.net/github_35631540/article/details/78818919)
+6. [跨域的解决](https://segmentfault.com/a/1190000011007043)
 
 ### 完成步骤
 1. 建立目录结构
@@ -50,7 +51,7 @@ npm install --save-dev babel-preset-es2015
 6. 开始引入 vuex
 7. 先看 index.js ，再看 app.js
 8. 其中引入了 js-cookie ，[js-cookie 的用法](https://www.cnblogs.com/xuyan1/p/8421284.html)和[wimdow.localStorage 的用法](https://www.cnblogs.com/st-leslie/p/5617130.html)。
-9. 尝试在项目中使用 localStorage。在 main.js 中引入全局变量 $sto （所有的全局变量的定义都保存在 assets 的 global.js 中），以便在组件中通过 this.$sto 来使用，虽然可以直接用 window.localStorage来使用，但是此设置的目的就是为了看着顺眼，所有全局变量都保存在 global.js 中，并且变量名以 $ 开头。
+9. 尝试在项目中使用 localStorage （后面发现不能用 51 ）。~~在 main.js 中引入全局变量 $sto （所有的全局变量的定义都保存在 assets 的 global.js 中），以便在组件中通过 this.$sto 来使用，虽然可以直接用 window.localStorage来使用，但是此设置的目的就是为了看着顺眼，所有全局变量都保存在 global.js 中，并且变量名以 $ 开头。~~
 10. 再看 user.js，其中引入了 api 中的 login 和 utils 中的 auth（此时搜了一下 auth 的意思，暂时把它解释为 认证 ），于是去看了 api 中的 login.js 和 utils 中的 auth.js
 11. auth.js 中封装了三个方法，分别用来设置 token 缓存（setToken），获取 token 缓存（setToken），删除 token 缓存（removeToken）
 12. login.js 中引入了 request，并且定义了三个 api 方法：login、getInfo、logout。
@@ -74,7 +75,7 @@ npm install --save-dev babel-preset-es2015
 结合 vuex 中 app.js 中的代码以及全局的 css 大致了解了它的代码
 20. 因为项目打开的时候侧边栏默认是隐藏的，所以先看 navbar 的代码
 21. navbar 用到了组件 *el-menu*、*el-dropdown*
-22. navbar 中引入了 Hamburger 组件和 breadcrumb 组件，先看 hamburger 组件，hamburger 组件是用来切换侧边栏的宽度
+22. navbar 中引入了 Hamburger 组件和 breadcrumb 组件，先看 hamburger 组件，hamburger 组件里面就一个 svg 图标，用来切换侧边栏的宽度
 23. 再看 breadcrumb 组件，它用来动态生成面包屑列表。用到了 *el-breadcrumb*，其中有一个getBreadcrumb 方法，了解[this.$route 对象：在使用了 vue-router 的应用中，路由对象会被注入每个组件中，赋值为 this.$route ，并且当路由切换时，路由对象会被更新。](https://www.cnblogs.com/wangEddy/p/8310262.html)[官方api说明](https://router.vuejs.org/zh/api/#%E8%B7%AF%E7%94%B1%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7)
 
 | 路由对象属性名称 | 数据类型 | 描述 |
@@ -199,8 +200,139 @@ npm install --save-dev babel-preset-es2015
     （5）此时的 store.getters.roles.length === 0 ，所以走 GetInfo 接口，开始拉取用户信息，拉取成功后 next()（如果此时的length !== 0 ，则直接走 next）
     （6）如果拉取用户信息失败，则前端登出，（后端登出走 logout 接口，服务器成功返回后 token 改为'' ，roles 改为 []，并且移除 token。前端登出将 token 改为'' ，并且移除 token）
 
-50. 到此登录功能基本看完
-51. 看到这里，发现梳理了很多逻辑，偏偏忘记了梳理 hamburger 的逻辑
-52. 现在开始梳理 hamburger 的逻辑
+    因为项目的根目录不是 '/login'，所以使用一开始进来的时候是会先走一遍 @/permission
+
+50. 到此登录功能基本看完。
+51. 自己在 permission 中加了一段简单代码，用于前端判断 token 是否超时，这里最后应该用 MD5 加密一下。
+    ``` js
+      if (curTimeStamp() - getToken() > 60 * 1000) {
+        removeToken()
+      }
+    ```
+    这里的逻辑出现了问题，原项目使用 cookie 保存 token，关闭浏览器后 cookie 就会消失。因为我在项目中直接就用了 localStorage，当时没有多想，但是 localStorage 是不会在浏览器关闭后消失的，它是在同源的同窗口中，始终存在的数据，所以用它来存储 token 就有很大的问题。
+
+    以前看过区别，但是没有实战就理解不透彻，现在再看一遍。
+    [cookie、session和localStorage、以及sessionStorage之间的区别](https://www.cnblogs.com/zr123/p/8086525.html)
+    [上面那个有点混乱](https://www.cnblogs.com/pengc/p/8714475.html)
+
+    下面的总结待完善和更正
+
+    |              | 属性    | 属性作用 |
+    |--------------|---------|--|
+    | cookie       | 名字    |  |
+    |              | 值      ||
+    |              | 过期时间 | 若不设置时间，则表示这个cookie的生命期为浏览器会话期间。 |
+    |              || 关闭浏览器窗口，cookie就会消失。 |
+    |              || 这种生命期为浏览器会话期的cookie被称为会话cookie。 |
+    |              | 路径    | 构成cookie的作用范围 |
+    |              || cookie中如果设置了路径参数，那么同一个网站中不同路径下的cookie互相是访问不到的 |
+    |              | 域      | 构成cookie的作用范围。cookie 需要指定作用域，不可跨域调用 |
+    |              |||
+    | session      | 路径    | 不能区分路径，同一个用户在访问一个网站期间，所有的session在任何一个地方都可以访问到 |
+    |              |||
+    | web Storage  | 拥有setItem,getItem,removeItem,clear 等方法 ||
+    |              | 包括sessionStorage、localStorage ||
+
+    |              | 存储在  |
+    |--------------|---------|
+    | cookie       | 若设置了过期时间，浏览器就会把cookie保存到硬盘上，关闭后再打开浏览器这些cookie仍然有效直到超过设定的过期时间。 |
+    || 若没设置过期时间，浏览器就会把cookie保存到内存里，不同的浏览器有不同的处理方式，暂时简单理解为关闭浏览器窗口，cookie就会消失。 |
+    | session      | 服务器 |
+    | web Storage  | 浏览器 |
+
+    |              | 安全性  |
+    |--------------|---------|
+    | cookie       | 保存在浏览器，不是很安全，别人可以分析存放在本地的cookie并进行cookie欺骗，Cookie截获 |
+    || 考虑到安全应当使用session，将登录信息等重要信息存放为session |
+    | session      |  |
+    | web Storage  ||
+
+    |              | 有效性  |
+    |--------------|---------|
+    | cookie       | 只在设置的cookie过期时间之前有效，即使窗口关闭或浏览器关闭，没设置则只在当前浏览器窗口有效 |
+    | session      | |
+    | sessionStorage | 仅在当前浏览器窗口关闭之前有效 |
+    | localStorage | 始终有效，窗口或浏览器关闭也一直保存，因此用作持久数据 |
+
+    |              | 作用域  |
+    |--------------|---------|
+    | cookie       | 在所有同源窗口中都是共享的 |
+    | session      | |
+    | sessionStorage | 不在不同的浏览器窗口中共享，即使是同一个页面 |
+    | localStorage | 在所有同源窗口中都是共享的 |
+
+    |              | 服务器性能  |
+    |--------------|---------|
+    | cookie       |  |
+    | session      | 会在一定时间内保存在服务器上，当访问增多，会比较占用你服务器的性能 |
+    || 考虑到减轻服务器性能方面，应当使用cookie |
+    | web Storage  ||
+
+    |              | 存储空间大小  |
+    |--------------|---------|
+    | cookie       | 单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie |
+    | session      |  |
+    | web Storage  | 达到 5M 或更大 |
+    |              ||
+
+    |              | 保存的数据类型  | 方法 |
+    |--------------|---------|------------|
+    | cookie       | 字符串 | 需要前端开发者封装setCookie，getCookie |
+    | session      | 对象   ||
+    | web Storage  || 拥有setItem,getItem,removeItem,clear等方法 |
+
+    |              | 作用 |
+    |--------------|---------|
+    | cookie       | 与服务器进行交互，cookie数据始终在同源的http请求中携带 |
+    | session      |  |
+    | web Storage  | 在本地“存储”数据，不会自动把数据发送给服务器，仅在本地保存 |
+
+52. 所以还是改回使用 js-cookie，先用 npm 引入(npm i js-cookie)，然后全局搜 storage，把登录相关的替换成使用 cookie，其他地方还是用了 localStorage，并且把 localStorage 保存的名称都写到一起去了，在@utils/storage，以防多了之后产生名字混乱。
+53. 看到这里，发现梳理了很多逻辑，偏偏忘记了梳理 hamburger 的逻辑
+54. 现在开始梳理 hamburger 的逻辑
     
-    （1）首先还是看 layout 组件，先看它的样式 app-wrapper ，有一个 position: relative; 样式
+    （1）首先还是看 layout 组件，先看它的样式 .app-wrapper ，有一个 position: relative; 样式
+
+    （2）然后它有一个遮罩层，当 device === 'mobile' 并且 sidebar.opened 为true时才显示
+
+    （3）device 和 sidebar.opened 都在 store 的 app.js 和 getters 中有定义
+
+    （4）device 初始是 'desktop'，sidebar.opened 的初始是 !+getSidebarStatus()，即看缓存中有没有SidebarStatus，一开始是没有，没有就是 true
+
+    （5）classObj 有四种样式可能
+         ``` 
+            classObj() {
+              return {
+                hideSidebar: !this.sidebar.opened,
+                openSidebar: this.sidebar.opened,
+                withoutAnimation: this.sidebar.withoutAnimation,
+                mobile: this.device === 'mobile'
+              }
+            }
+         ```
+         
+        1. hideSidebar 隐藏侧边栏，由 opened 决定，此时侧边栏宽 36px
+
+        2. openSidebar 打开侧边栏，由 opened 决定
+
+        3. withoutAnimation 无动画
+        
+        4. mobile 启用 mobile 样式，此时 main-container 的 margin-left 为 0 ，侧边栏大小还是不变，它的hideSidebar 的 侧边栏在 x 轴的 -$sideBarWidth 点
+
+    （6）app.js 一共三个方法。
+
+        1. ToggleSideBar ：如果 sidebar.opened 为 true 就添加一个值为 1 的 sidebarStatus 缓存
+
+                                              为 false 就添加一个值为 0 的 sidebarStatus 缓存
+
+        2. CloseSideBar ：根据传入的 withoutAnimation 的值，关闭sidebar
+
+        3. ToggleDevice ：根据传入的 device 的值，改变 device 
+
+        action 提交的是 mutation，所以项目中的 mutation 都是通过 action 提交来触发的
+
+    （7）看 layout 的 mixins，isMobile() 根据屏幕的宽度 和 1024 的大小比较来确定，如果是 mobile，就改变 device 为 'mobile' ，并且无动画地关闭侧边栏，并且在 beforeMount 之前添加一个方法，当屏幕大小改变时触发resize 方法，重新判断 isMobile()
+    （8）看 hamburger 组件，两个参数：isActive 和 toggleClick ，isActive 控制图标方向，和 sidebar.opened 同值，toggleClick 改变 sidebar.opened 的值
+ 
+
+55. 因为花裤衩大佬的项目出现跨域问题，[跨域的解决](https://segmentfault.com/a/1190000011007043)

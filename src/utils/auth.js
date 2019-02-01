@@ -1,12 +1,12 @@
-import { storage } from '@/assets/global'
+import Cookies from 'js-cookie'
 
 const TokenKey = 'Admin-Token'
 
-const getToken = () => storage.getItem(TokenKey)
+const getToken = () => Cookies.get(TokenKey)
 
-const setToken = token => storage.setItem(TokenKey, token)
+const setToken = token => Cookies.set(TokenKey, token)
 
-const removeToken = () => storage. removeItem(TokenKey)
+const removeToken = () => Cookies. remove(TokenKey)
 
 export {
   getToken, setToken, removeToken
