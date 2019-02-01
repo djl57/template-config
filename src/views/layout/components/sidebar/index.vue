@@ -43,8 +43,7 @@ export default {
     }
   },
   created() {
-    console.log('$route', this.$route.path)
-    console.log('this.$router.options.routes', this.$router.options.routes)
+    console.log('定义的constRouters', this.$router.options.routes)
   }
 }
 </script>

@@ -10,11 +10,7 @@ const app = {
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {
-      if (state.sidebar.openen) {
-        storage.setItem('sidebarStatus', 1)
-      } else {
-        storage.setItem('sidebarStatus', 0)
-      }
+      state.sidebar.openen ? storage.setItem('sidebarStatus', 1) : storage.setItem('sidebarStatus', 0)
       state.sidebar.opened = !state.sidebar.opened
       state.sidebar.withoutAnimation = false
     },
@@ -27,12 +23,8 @@ const app = {
   },
   actions: {
     ToggleSideBar: ({ commit }) => commit('TOGGLE_SIDEBAR'),
-    CloseSideBar: ({ commit }, { withoutAnimation }) => {
-      commit('CLOSE_SIDEBAR', withoutAnimation)
-    },
-    ToggleDevice: ({ commit }, device) => {
-      commit('TOGGLE_DEVICE', device)
-    }
+    CloseSideBar: ({ commit }, { withoutAnimation }) => commit('CLOSE_SIDEBAR', withoutAnimation),
+    ToggleDevice: ({ commit }, device) => commit('TOGGLE_DEVICE', device)
   }
 }
 

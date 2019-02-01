@@ -16,7 +16,7 @@ let getBaseApi = (lifeCycle) => {
     return '"prod"'
   }
   // lifeCycle === 'dev:mock' || lifeCycle === 'dev'
-  return '"https://easy-mock.com/mock/5950a2419adc231f356a6636/vue-admin"'
+  return '"/"'
 }
 
 module.exports = merge(prodEnv, {

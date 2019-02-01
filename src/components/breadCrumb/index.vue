@@ -52,7 +52,7 @@ export default {
       }
       // !== 的优先级 高于 &&
       this.levelList = matched.filter(item => item.meta && item.meta.title)
-      console.log('levelList', this.levelList)
+      console.log('面包屑导航栏列表：', this.levelList)
     },
     handleLink(item) {
       const { redirect, psth } = item

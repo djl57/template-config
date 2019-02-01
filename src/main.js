@@ -11,11 +11,11 @@ import lang from 'element-ui/lib/locale/lang/en' // 国际化
 import locale from 'element-ui/lib/locale'
 locale.use(lang)
 
-import '@/icons'
-// import '@/permission' // 权限控制，暂时跳过
+import '@/icons' // 引入svg-icon组件
+import '@/permission' // 权限控制
 
 import { storage } from './assets/global'
-Vue.prototype.$storage = storage
+Vue.prototype.$sto = storage
 
 Vue.config.productionTip = false
 
