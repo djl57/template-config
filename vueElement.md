@@ -49,9 +49,13 @@
 3. 看[文档 - 登陆逻辑](https://juejin.im/post/591aa14f570c35006961acac)：
 
    （1）用户填完用户名和密码，提交
+
    （2）向服务端验证是否正确
+
    （3）验证通过后，服务端返回一个 token
+
    （4）前端拿到 token 之后，存入缓存
+   
    （5）再根据 token 去请求用户的详细信息（如用户权限、用户名等）
 
    （6）获取到用户权限 role 之后，根据用户的 role ，动态算出其对应有权限的路由，通过 [router.addRoutes](https://router.vuejs.org/zh/api/#router-addroutes) 动态挂载这些路由
@@ -62,6 +66,9 @@
 5. 理一遍逻辑：
 
    （1）获取用户信息后走 GenerateRoutes action，它返回一个 Promise，roles 为接口传回来的用户信息里的 roles，根据这个 roles 去删选所有的 asyncRouters ，其中 admin 这个角色可以查看所有。所以先进行一次是否 includes 'admin' 的判断，如果含有，则全显示，如果不含有，再进行筛选。
+
    （2）筛选函数 filterAsyncRouter 是一个递归函数。传入 routes：要筛选的路由列表，roles：角色的权限。
+
    （3）hasPermission 方法用来判断是否有权限。
+
    （4）有的话就把路由 push 进来，同时如果此路由有子路由，就再走一遍 filterAsyncRouter 函数，并且把此子路由定义为路由的children。
