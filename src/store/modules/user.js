@@ -4,8 +4,10 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 const user = {
   state: {
     token: getToken(),
-    name: 'djlun',
-    avatar: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=173886539,2588581153&fm=27&gp=0.jpg',
+    // name: 'djlun',
+    // avatar: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=173886539,2588581153&fm=27&gp=0.jpg',
+    name: '',
+    avatar: '',
     roles: []
   },
 
@@ -14,16 +16,17 @@ const user = {
     SET_NAME: (state, name) => state.name = name,
     SET_AVATAR: (state, avatar) => state.avatar = avatar,
     SET_ROLES: (state, roles) => state.roles = roles
-    
   },
 
   actions: {
     // 登陆
     Login: ({ commit }, userInfo) => {
+      console.log('进到登录action')
       const username = userInfo.username.trim() // trim()去掉字符串的首尾空格
       return new Promise((resolve, reject) => {
         login(username, userInfo.password)
         .then(res => {
+          console.log('登录接口返回数据：' + JSON.stringify(res))
           const data = res.data
           setToken(data.token)
           commit('SET_TOKEN', data.token)
@@ -47,6 +50,7 @@ const user = {
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
           resolve(res)
+          // reject('token错误') // 如果想走前端登出那个action的话开启
         })
         .catch(err => reject(err))
       })
@@ -54,6 +58,7 @@ const user = {
 
     // 登出
     LogOut: ({ commit, state }) => {
+      console.log('进到登出actions')
       return new Promise((resolve, reject) => {
         logout(state.token)
         .then(() => {

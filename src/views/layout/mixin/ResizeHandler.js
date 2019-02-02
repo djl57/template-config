@@ -5,14 +5,15 @@ const WIDTH = 1024
 const RATIO = 3 // 比率
 
 export default {
-  watch: {
-    $route(route) {
-      console.log(`layout的$route，打印this.device：${this.device}`)
-      if (this.device === 'mobile' && this.sidebar.opened) {
-        store.dispatch('CloseSideBar', { withoutAnimation: false })
-      }
-    }
-  },
+  // 此方法好像没什么用
+  // watch: {
+  //   $route(route) {
+  //     console.log(`layout的$route，打印this.device：${this.device}`)
+  //     if (this.device === 'mobile' && this.sidebar.opened) {
+  //       store.dispatch('CloseSideBar', { withoutAnimation: false })
+  //     }
+  //   }
+  // },
   beforeMount () {
     window.addEventListener('resize', this.resizeHandler)
   },

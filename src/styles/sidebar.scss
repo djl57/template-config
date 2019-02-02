@@ -65,11 +65,11 @@
 
   .hideSidebar {
     .sidebar-container {
-      width: 36px !important;
+      width: $hideSideBarWidth !important;
     }
 
     .main-container {
-      margin-left: 36px;
+      margin-left: $hideSideBarWidth;
     }
 
     .submenu-title-noDropdown {
@@ -95,6 +95,7 @@
 
     .el-menu--collapse {
       .el-submenu {
+        // 选择el-submenu的所有子.el-submenu__title
         &>.el-submenu__title {
           &>span {
             height: 0;

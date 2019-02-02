@@ -1,7 +1,37 @@
-// 在sidebar中有用
+// sidebar
 $menuBg: #304156;
 $subMenuBg: #1f2d3d;
 $menuHover: #001528;
-$sideBarWidth: 180px;
+$menuText:#bfcbd9;
+$menuActiveText:#409eff;
 
+$sideBarWidth: 180px;
+$hideSideBarWidth: 36px;
+
+// main
 $mainBg: #F6F8F9;
+
+// login
+$loginBg: #2d3a4b;
+$light_gray: #eee;
+$dark_gray: #889aa4;
+
+// base color 
+$blue:#324157;
+$light-blue:#3A71A8;
+$red:#C03639;
+$pink: #E65D6E;
+$green: #30B08F;
+$tiffany: #4AB7BD;
+$yellow:#FEC171;
+$panGreen: #30B08F;
+
+// the :export directive is the magic sauce for webpack
+:export {
+  menuBg: $menuBg;
+  subMenuBg: $subMenuBg;
+  menuHover: $menuHover;
+  menuText:$menuText;
+  menuActiveText:$menuActiveText;
+  sideBarWidth: $sideBarWidth;
+}

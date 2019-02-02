@@ -32,7 +32,6 @@
         <app-link v-else :to="resolvePath(child.path)"
           :key="child.name">
           <el-menu-item :index="resolvePath(child.path)">
-            {{ child.meta.title }}
             <item v-if="child.meta" :icon="child.meta.icon" :title="child.meta.title"></item>
           </el-menu-item>
         </app-link>

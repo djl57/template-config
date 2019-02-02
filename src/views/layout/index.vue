@@ -13,6 +13,7 @@
 <script>
 import { NavBar, SideBar, AppMain } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Layout',
@@ -23,12 +24,18 @@ export default {
   },
   mixins: [ResizeMixin],
   computed: {
-    sidebar () {
-      return this.$store.state.app.sidebar
-    },
-    device () {
-      return this.$store.state.app.device
-    },
+    ...mapGetters([
+      'sidebar',
+      'device'
+    ]),
+    // sidebar () {
+    //   // return this.$store.state.app.sidebar
+    //   return this.$store.getters.sidebar
+    // },
+    // device () {
+    //   // return this.$store.state.app.device
+    //   return this.$store.getters.device
+    // },
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
@@ -39,20 +46,6 @@ export default {
     }
   },
   methods: {
-    // 为了测试MessageBox组件写的代码
-    // message() {
-    //   this.$msgbox.confirm(
-    //     '你已被登出，可以取消继续留在该页面，或者重新登录',
-    //     '确定登出',
-    //     {
-    //       confirmButtonText: '重新登录',
-    //       cancelButtonText: '取消',
-    //       type: 'warning'
-    //     }
-    //   )
-    //   .then(() => console.log('confirm'))
-    //   .catch(() => console.log('cancel'))
-    // },
     handleClickOutside () {
       this.$store.dispatch('CloseSideBar', {
         withoutAnimation: false
@@ -76,9 +69,9 @@ export default {
   background-color: #000;
   opacity: 0.3;
   width: 100%;
-  top: 0;
   height: 100%;
   position: absolute;
+  top: 0;
   z-index: 999;
 }
 </style>

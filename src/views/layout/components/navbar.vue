@@ -48,6 +48,9 @@ export default {
       this.$store.dispatch('ToggleSideBar')
     },
     logout () {
+      // this.$router.push({
+      //   path: '/login'
+      // })
       this.$store.dispatch('LogOut')
       .then(() => location.reload() /* location.reload实现页面刷新 */)
     }
