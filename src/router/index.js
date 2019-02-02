@@ -54,11 +54,11 @@ export const asyncRouters = [
     path: '/permission',
     component: Layout,
     redirect: '/permission/index',
-    alwaysShow: true, // will always show the root menu
+    alwaysShow: true,
     meta: {
       title: '权限',
       icon: 'lock',
-      roles: ['djlun', 'admin'] // you can set roles in root nav
+      roles: ['djlun', 'admin']
     },
     children: [
       {
@@ -67,7 +67,7 @@ export const asyncRouters = [
         name: 'PagePermission',
         meta: {
           title: '页面权限',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: ['admin']
         }
       },
       {
@@ -76,7 +76,6 @@ export const asyncRouters = [
         name: 'DirectivePermission',
         meta: {
           title: '指令权限'
-          // if do not set roles, means: this page does not require permission
         }
       }
     ]

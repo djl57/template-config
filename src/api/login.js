@@ -1,16 +1,7 @@
 import request from '@/utils/request'
-// console.log(request()) // Promise {<pending>}
+
 const login = (username, passward) => {
-  // return request({
-  //   url: '/user/login',
-  //   method: 'post',
-  //   data: {
-  //     username,
-  //     passward
-  //   }
-  // })
   return new Promise(resolve => {
-    console.log('进到login接口')
     setTimeout(() => {
       let res = {
         code: 0,
@@ -25,13 +16,7 @@ const login = (username, passward) => {
 }
 
 const getInfo = (token) => {
-  // return request({
-  //   url: '/user/info',
-  //   method: 'get',
-  //   param: { token }
-  // })
   return new Promise(resolve => {
-    console.log('进到getInfo接口')
     setTimeout(() => {
       let res = {
         code: 0,
@@ -48,12 +33,7 @@ const getInfo = (token) => {
 }
 
 const logout = () => {
-  // return request({
-  //   url: '/user/logout',
-  //   method: 'post'
-  // })
   return new Promise(resolve => {
-    console.log('进到登出接口')
     setTimeout(() => {
       let res = {
         code: 0,
