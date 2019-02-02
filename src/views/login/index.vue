@@ -106,7 +106,7 @@ export default {
       redirect: undefined,
       loginInfo: [ '登录', '注册' ],
       loginType: 'login', // or register
-      users: ['admin']
+      users: ['admin', 'djlun', 'test']
     }
   },
   methods: {

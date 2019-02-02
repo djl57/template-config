@@ -23,6 +23,10 @@
 | - appmain | 主要内容 |
 | svgicon   | icon组件，使用svg时调用此组件 |
 | login     | 登陆页面 |
+| permission | 权限控制示例，admin 和 djlun 角色可看到 |
+| - - page  | admin可看到 |
+| - - directive | 能看到 permission 的所有都可看到 |
+| - - switchRoles | 转换当前账号的角色 |
 
 什么是[dashboard](http://www.woshipm.com/data-analysis/691262.html)
 

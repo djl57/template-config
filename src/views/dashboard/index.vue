@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <!-- dashboard -->
+  <div class="app-container">
+    dashboard
   </div>
 </template>
 

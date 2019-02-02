@@ -11,11 +11,15 @@ const login = (username, passward) => {
         }
       }
       resolve(res)
-    }, 800)
+    }, 200)
   })
 }
 
 const getInfo = (token) => {
+  let role
+  if (token.includes('admin')) role = ['admin']
+  if (token.includes('djlun')) role = ['djlun']
+  if (token.includes('test')) role = ['test']
   return new Promise(resolve => {
     setTimeout(() => {
       let res = {
@@ -24,11 +28,11 @@ const getInfo = (token) => {
         data: {
           name: 'djlun',
           avatar: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=173886539,2588581153&fm=27&gp=0.jpg',
-          roles: ['admin']
+          roles: role
         }
       }
       resolve(res)
-    }, 800)
+    }, 200)
   })
 }
 
@@ -40,7 +44,7 @@ const logout = () => {
         msg: '登出成功'
       }
       resolve(res)
-    }, 800)
+    }, 200)
   })
 }
 

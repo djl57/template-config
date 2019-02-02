@@ -47,18 +47,18 @@ router.beforeEach((to, from, next) => {
         // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
         // 应该是指后台某个页面可以动态改变某个角色的权限
         // 如果想要动态增加角色呢？
-        // if (hasPermission(store.getters.roles, to.meta.roles)) {
-        //   next()
-        // } else {
-        //   next({
-        //     path: '/401',
-        //     replace: true,
-        //     query: {
-        //       noGoBack: true
-        //     }
-        //   })
-        // }
-        next()
+        if (hasPermission(store.getters.roles, to.meta.roles)) {
+          next()
+        } else {
+          next({
+            path: '/401',
+            replace: true,
+            query: {
+              noGoBack: true
+            }
+          })
+        }
+        // next()
       }
     }
   } else {

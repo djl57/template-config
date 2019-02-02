@@ -11,6 +11,16 @@ export const constRouters = [
     component: () => import('@/views/login'),
     hidden: true
   },
+  // {
+  //   path: '/404',
+  //   component: () => import('@/views/errorPage/404'),
+  //   hidden: true
+  // },
+  // {
+  //   path: '/401',
+  //   component: () => import('@/views/errorPage/401'),
+  //   hidden: true
+  // },
   {
     path: '/',
     component: Layout,
@@ -80,4 +90,6 @@ export const asyncRouters = [
       }
     ]
   },
+
+  { path: '*', redirect: '/404', hidden: true }
 ]

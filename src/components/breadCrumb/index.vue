@@ -46,7 +46,7 @@ export default {
         matched = [{
           path: '/dashboard',
           meta: {
-            title: '首页'/* title: 'Dashboard' */
+            title: '首页'
           }
         }].concat(matched)
       }
@@ -55,7 +55,7 @@ export default {
       console.log('面包屑导航栏列表：', this.levelList)
     },
     handleLink(item) {
-      const { redirect, psth } = item
+      const { redirect, path } = item
       if (redirect) {
         this.$router.push(redirect)
         return

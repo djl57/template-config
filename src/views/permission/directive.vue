@@ -1,10 +1,12 @@
 <template>
-  <div>
+  <div class="app-container">
     permission
   </div>
 </template>
 
 <script>
+import permission from '@/directive/permission/index'
+
 export default {
 
 }

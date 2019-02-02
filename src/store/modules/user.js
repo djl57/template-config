@@ -78,6 +78,23 @@ const user = {
         removeToken()
         resolve()
       })
+    },
+
+    // 动态修改权限
+    ChangeRoles: ({ commit, dispatch }, role) => {
+      return new Promise(resolve => {
+        commit('SET_TOKEN', role)
+        setToken(role)
+        getInfo(role) // 接 api 接口的时候要改
+        .then(res => {
+          const data = res.data
+          commit('SET_ROLES', data.roles)
+          commit('SET_NAME', data.name)
+          commit('SET_AVATAR', data.avatar)
+          dispatch('GenerateRoutes', data) // 动态修改权限后 重绘侧边菜单
+          resolve()
+        })
+      })
     }
   }
 }

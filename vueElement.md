@@ -72,3 +72,7 @@
    （3）hasPermission 方法用来判断是否有权限。
 
    （4）有的话就把路由 push 进来，同时如果此路由有子路由，就再走一遍 filterAsyncRouter 函数，并且把此子路由定义为路由的children。
+
+6. 开始看 permission 的 page 页面，引入了一个 SwitchRoles，可用来切换当前登录的账号的角色。
+
+
