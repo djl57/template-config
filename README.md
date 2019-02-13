@@ -8,7 +8,7 @@
 | axios         | 是          |
 | svg-icon      | 是          |
 | 侧边栏自动生成 | 是          |
-| 前端鉴权      | 否          |
+| 前端鉴权      | 是（需后端） |
 
 | 组件 | 作用 |
 |------|------|
@@ -25,8 +25,9 @@
 | login     | 登陆页面 |
 | permission | 权限控制示例，admin 和 djlun 角色可看到 |
 | - - page  | admin可看到 |
-| - - directive | 能看到 permission 的所有都可看到 |
+| - - directive | 能看到 permission 页面的所有角色都可看到 |
 | - - switchRoles | 转换当前账号的角色 |
+| svgIcon页面| 展示了一些 svg 图标，点击图标复制代码 |
 
 什么是[dashboard](http://www.woshipm.com/data-analysis/691262.html)
 
@@ -220,7 +221,7 @@ npm install --save-dev babel-preset-es2015
     因为项目的根目录不是 '/login'，所以使用一开始进来的时候是会先走一遍 @/permission
 
 50. 到此登录功能基本看完。
-51. 自己在 permission 中加了一段简单代码，用于前端判断 token 是否超时，这里最后应该用 MD5 加密一下。
+51. 自己在 permission 中加了一段简单代码，用于前端判断 token 是否超时，这里最后应该用 MD5 加密一下?。
     ``` js
       if (curTimeStamp() - getToken() > 60 * 1000) {
         removeToken()

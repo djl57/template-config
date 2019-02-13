@@ -1,15 +1,16 @@
 import { constRouters, asyncRouters } from '@/router'
 
 const hasPermission = (roles, route) => {
-  let meta = route.meta,
-      metaRoles = route.meta.roles;
-  if (meta && metaRoles) return roles.some(role => metaRoles.includes(role))
-  return true
+  if (route.meta && route.meta.roles) {
+    return roles.some(role => route.meta.roles.includes(role))
+  } else {
+    return true
+  }
 }
 
 const filterAsyncRouter = (routes, roles) => {
   const res = []
-
+  console.log(roles)
   routes.forEach(route => {
     const tmp = { ...route }
     if (hasPermission(roles, tmp)) {
@@ -38,7 +39,6 @@ const permission = {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
         const { roles } = data
-        console.log(roles)
         let accessedRouters
         if (roles.includes('admin')) {
           accessedRouters = asyncRouters

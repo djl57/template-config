@@ -11,7 +11,12 @@ import { getToken/* , removeToken */ } from '@/utils/auth'
 const hasPermission = (roles, permissionRoles) => {
   if (roles.includes('admin')) return true
   if (!permissionRoles) return true
-  return roles.some(role => permissionRoles.include(role))
+  // try {
+  console.log('permissionRoles', permissionRoles)
+  return roles.some(role => permissionRoles.includes(role))
+  // } catch (error) {
+  //   Message.error('没有此页面的权限')
+  // }
 }
 
 const whiteList = ['/login']  // 不重定向白名单

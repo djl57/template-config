@@ -17,9 +17,14 @@
             首页
           </el-dropdown-item>
         </router-link>
-        <el-dropdown-item>
+        <a href="https://github.com/djl57/template-config" target="_blank">
+          <el-dropdown-item>
+            github
+          </el-dropdown-item>
+        </a>
+        <el-dropdown-item divided>
           <span @click="logout">
-            登出
+            退出登录
           </span>
         </el-dropdown-item>
       </el-dropdown-menu>
@@ -62,6 +67,7 @@ export default {
 .navbar {
   height: 50px;
   line-height: 50px;
+  margin: 6px 8px 8px;
   background-color: #ffffff;
   box-shadow: 0 1px 4px 0 rgba(238, 238, 238, 0.5);
   border-radius: 0px !important;

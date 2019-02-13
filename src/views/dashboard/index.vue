@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    dashboard
+    hello，这是首页。
   </div>
 </template>
 

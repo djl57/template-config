@@ -83,6 +83,10 @@ const user = {
     // 动态修改权限
     ChangeRoles: ({ commit, dispatch }, role) => {
       return new Promise(resolve => {
+        // 这里切换的是权限，所以用户不需要重新登录
+        // 实际开发过程中这里的逻辑还需要改
+        // 这里为何要重新设置token？因为只是用来前端显示
+        // 具体修改权限需要和后端配合实现
         commit('SET_TOKEN', role)
         setToken(role)
         getInfo(role) // 接 api 接口的时候要改

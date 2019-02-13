@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import selfcss from './modules/selfcss'
 
 Vue.use(Router)
 
@@ -11,39 +12,22 @@ export const constRouters = [
     component: () => import('@/views/login'),
     hidden: true
   },
-  // {
-  //   path: '/404',
-  //   component: () => import('@/views/errorPage/404'),
-  //   hidden: true
-  // },
-  // {
-  //   path: '/401',
-  //   component: () => import('@/views/errorPage/401'),
-  //   hidden: true
-  // },
+
   {
-    path: '/',
+    path: '',
     component: Layout,
-    redirect: '/dashboard',
-    name: 'Dashboard',
-    hidden: true,
+    redirect: 'dashboard',
     children: [
       {
         path: 'dashboard',
-        component: () => import('@/views/dashBoard')
+        component: () => import('@/views/dashBoard'),
+        name: 'Dashboard',
+        meta: { title: '首页', icon: 'dashboard', noCache: true }
       }
     ]
   },
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: '外链', icon: 'link' }
-      }
-    ]
-  }
+
+  selfcss
 ]
 
 const routers = new Router({
@@ -91,5 +75,28 @@ export const asyncRouters = [
     ]
   },
 
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '/icon',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/svgIcons/index'),
+        name: 'Icons',
+        meta: { title: '图标', icon: 'icon', noCache: true }
+      }
+    ]
+  },
+
+  {
+    path: 'external-link',
+    component: Layout,
+    children: [
+      {
+        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
+        meta: { title: '参考文档', icon: 'link' }
+      }
+    ]
+  }
+
 ]

@@ -3,7 +3,8 @@
     <!-- separator：分隔符（默认 / ） -->
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
-        <span v-if="index === levelList.length-1" 
+        <!-- <span v-if="item.redirect==='noredirect'||index === levelList.length-1"  -->
+        <span v-if="item.redirect==='noredirect'||index === levelList.length-1" 
           class="no-redirect">
           {{ item.meta.title }}
         </span>
@@ -42,7 +43,7 @@ export default {
       // console.log(this.$route.name) // undefined
       let matched = this.$route.matched.filter(item => item.name)
       const first = matched[0]
-      if (first && first.name !== 'dashboard') {
+      if (first && first.name.trim() !== 'Dashboard') {
         matched = [{
           path: '/dashboard',
           meta: {
@@ -52,7 +53,7 @@ export default {
       }
       // !== 的优先级 高于 &&
       this.levelList = matched.filter(item => item.meta && item.meta.title)
-      console.log('面包屑导航栏列表：', this.levelList)
+      // console.log('面包屑导航栏列表：', this.levelList)
     },
     handleLink(item) {
       const { redirect, path } = item

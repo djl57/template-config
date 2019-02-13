@@ -38,7 +38,7 @@
           @keyup.enter.native="handleLogin" />
           <!-- autocomplete="on" -->
         <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="pwdType === 'passward' ? 'eye' : 'eye-open'" />
+          <svg-icon :icon-class="pwdType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
 
@@ -69,14 +69,10 @@ export default {
   name: 'login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      // console.log(rule)
-      // console.log(value) // djlun
-      // console.log(callback)
       if (this.users.includes(value)) callback()
       callback(new Error('请使用测试用户名登录'))
     }
     const validatePass = (rule, value, callback) => {
-      // console.log('value', value)
       if (value === '123456') callback()
       callback(new Error('测试密码错误'))
     }
@@ -106,7 +102,8 @@ export default {
       redirect: undefined,
       loginInfo: [ '登录', '注册' ],
       loginType: 'login', // or register
-      users: ['admin', 'djlun', 'test']
+      // users: ['admin', 'djlun', 'test']
+      users: ['admin']
     }
   },
   methods: {
